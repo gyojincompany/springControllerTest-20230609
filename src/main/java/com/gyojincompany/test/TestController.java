@@ -1,5 +1,7 @@
 package com.gyojincompany.test;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +48,7 @@ public class TestController {
 		model.addAttribute("mname", memberName);
 		model.addAttribute("mage", memberAge);		
 		
-		return "memberinfo";		
+		return "memberinfo";
 	}
 	
 	@RequestMapping(value = "/memberinfo2")
@@ -65,7 +67,21 @@ public class TestController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "login";
+	}
 	
-	
+	@RequestMapping(value = "/loginOk")
+	public String loginOk(HttpServletRequest request, Model model) {
+		
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		
+		model.addAttribute("memberId", mid);
+		model.addAttribute("memberPw", mpw);
+		
+		return "loginOk";
+	}
 	
 }
